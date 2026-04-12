@@ -1,0 +1,25 @@
+{
+  "name": "@ai-blocks/ui-components",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ai-blocks/block-schemas": "workspace:*",
+    "@ai-blocks/core": "workspace:*",
+    "react": "^18.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0"
+  }
+}

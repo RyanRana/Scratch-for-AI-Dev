@@ -1,0 +1,18 @@
+
+> @ai-blocks/web@0.1.0 build /Users/ryanrana/Downloads/ai-blocks-main/apps/web
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 125 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                        1.55 kB │ gzip:   0.78 kB
+dist/assets/jszip.min-CbEqa__I.js     97.42 kB │ gzip:  30.15 kB
+dist/assets/index-BkeLvShy.js      1,031.24 kB │ gzip: 252.12 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.01s

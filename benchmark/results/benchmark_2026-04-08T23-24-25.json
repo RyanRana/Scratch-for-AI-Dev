@@ -1,0 +1,424 @@
+{
+  "meta": {
+    "model": "claude-opus-4-6",
+    "timestamp": "2026-04-08T23:24:25.002162+00:00",
+    "total_blocks": 505,
+    "method": "both"
+  },
+  "challenges": [
+    {
+      "id": "clf_01_random_forest",
+      "title": "Random Forest Classifier",
+      "prompt": "Write a complete Python script that loads the Iris dataset from sklearn, splits it 80/20 stratified, trains a Random Forest classifier with 200 trees, predicts on the test set, and prints accuracy, precision, recall, and F1.",
+      "blocks": {
+        "method": "blocks",
+        "challenge_id": "clf_01_random_forest",
+        "code": "import numpy as np\nimport pandas as pd\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\n# Load Iris dataset from sklearn\niris = load_iris()\ndf = pd.DataFrame(data=iris.data, columns=iris.feature_names)\ndf['target'] = iris.target\n\n# Stratified split 80/20\nX = df.drop(columns=['target']).values\ny = df['target'].values\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\n# Train Random Forest with 200 trees\nrf_model = RandomForestClassifier(\n    n_estimators=200,\n    max_depth=None,\n    min_samples_split=2,\n    max_features='sqrt',\n    random_state=42\n)\nrf_model.fit(X_train, y_train)\n\n# Predict on test set\ny_pred = rf_model.predict(X_test)\n\n# Evaluate\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred, average='weighted', zero_division=0)\nrecall = recall_score(y_test, y_pred, average='weighted', zero_division=0)\nf1 = f1_score(y_test, y_pred, average='weighted')\n\n# Print results\nprint(f'Accuracy:  {accuracy:.4f}')\nprint(f'Precision: {precision:.4f}')\nprint(f'Recall:    {recall:.4f}')\nprint(f'F1 Score:  {f1:.4f}')",
+        "raw_stages": {
+          "stage1": {
+            "categories": [
+              "data-io",
+              "data-processing",
+              "classical-ml",
+              "evaluation"
+            ],
+            "pattern": "supervised_classification",
+            "search_terms": [
+              "load iris dataset",
+              "train test split stratified",
+              "random forest classifier",
+              "accuracy precision recall f1",
+              "sklearn classification metrics"
+            ],
+            "metrics": {
+              "latency_s": 2.694,
+              "input_tokens": 309,
+              "output_tokens": 67,
+              "total_tokens": 376,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "retrieval": {
+            "blocks_retrieved": 60,
+            "catalog_chars": 7776,
+            "pattern": "supervised_classification"
+          },
+          "stage2": {
+            "blocks_selected": 10,
+            "wiring_count": 15,
+            "metrics": {
+              "latency_s": 21.006,
+              "input_tokens": 3302,
+              "output_tokens": 1874,
+              "total_tokens": 5176,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "stage3_polish": {
+            "metrics": {
+              "latency_s": 5.068,
+              "input_tokens": 5674,
+              "output_tokens": 461,
+              "total_tokens": 6135,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          }
+        },
+        "metrics": {
+          "total_calls": 3,
+          "total_latency_s": 28.768,
+          "total_input_tokens": 9285,
+          "total_output_tokens": 2402,
+          "total_tokens": 11687,
+          "per_call": [
+            {
+              "latency_s": 34.153,
+              "input_tokens": 128,
+              "output_tokens": 2831,
+              "total_tokens": 2959,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "RandomForestClassifier",
+            "train_test_split",
+            "accuracy_score"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 37,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      },
+      "vanilla": {
+        "method": "vanilla",
+        "challenge_id": "clf_01_random_forest",
+        "code": "\"\"\"Train a Random Forest on the Iris dataset and report classification metrics.\"\"\"\n\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\n# Load dataset\nX, y = load_iris(return_X_y=True)\n\n# Stratified 80/20 split\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\n# Train Random Forest with 200 trees\nclf = RandomForestClassifier(n_estimators=200, random_state=42)\nclf.fit(X_train, y_train)\n\n# Predict on the test set\ny_pred = clf.predict(X_test)\n\n# Compute metrics (weighted average for multiclass)\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred, average=\"weighted\")\nrecall = recall_score(y_test, y_pred, average=\"weighted\")\nf1 = f1_score(y_test, y_pred, average=\"weighted\")\n\n# Print results\nprint(f\"Accuracy:  {accuracy:.4f}\")\nprint(f\"Precision: {precision:.4f}\")\nprint(f\"Recall:    {recall:.4f}\")\nprint(f\"F1 Score:  {f1:.4f}\")",
+        "raw_response": "\n```python\n\"\"\"Train a Random Forest on the Iris dataset and report classification metrics.\"\"\"\n\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\n# Load dataset\nX, y = load_iris(return_X_y=True)\n\n# Stratified 80/20 split\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\n# Train Random Forest with 200 trees\nclf = RandomForestClassifier(n_estimators=200, random_state=42)\nclf.fit(X_train, y_train)\n\n# Predict on the test set\ny_pred = clf.predict(X_test)\n\n# Compute metrics (weighted average for multiclass)\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred, average=\"weighted\")\nrecall = recall_score(y_test, y_pred, average=\"weighted\")\nf1 = f1_score(y_test, y_pred, average=\"weighted\")\n\n# Print results\nprint(f\"Accuracy:  {accuracy:.4f}\")\nprint(f\"Precision: {precision:.4f}\")\nprint(f\"Recall:    {recall:.4f}\")\nprint(f\"F1 Score:  {f1:.4f}\")\n```",
+        "metrics": {
+          "total_calls": 1,
+          "total_latency_s": 5.741,
+          "total_input_tokens": 106,
+          "total_output_tokens": 379,
+          "total_tokens": 485,
+          "per_call": [
+            {
+              "latency_s": 34.153,
+              "input_tokens": 128,
+              "output_tokens": 2831,
+              "total_tokens": 2959,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "RandomForestClassifier",
+            "train_test_split",
+            "accuracy_score"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 26,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      }
+    },
+    {
+      "id": "dl_04_mnist_cnn",
+      "title": "MNIST CNN Classifier",
+      "prompt": "Write a PyTorch script that builds a CNN for MNIST (2 conv layers with ReLU and max-pooling, then 2 FC layers), trains for 10 epochs with Adam (lr=0.001) and cross-entropy loss, prints train/test accuracy each epoch.",
+      "blocks": {
+        "method": "blocks",
+        "challenge_id": "dl_04_mnist_cnn",
+        "code": "import torch\nimport torch.nn as nn\nimport torch.optim as optim\nfrom torchvision import datasets, transforms\nfrom torch.utils.data import DataLoader\n\n# Device configuration\ndevice = torch.device('cuda' if torch.cuda.is_available() else 'cpu')\n\n# Data loading - MNIST\ntransform = transforms.Compose([\n    transforms.ToTensor(),\n    transforms.Normalize((0.1307,), (0.3081,))\n])\n\ntrain_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)\ntest_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)\n\ntrain_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)\ntest_loader = DataLoader(test_dataset, batch_size=1000, shuffle=False)\n\n\n# CNN Model Definition\n# Architecture: Conv1 -> ReLU -> MaxPool -> Conv2 -> ReLU -> MaxPool -> FC1 -> ReLU -> FC2\nclass MNISTNet(nn.Module):\n    def __init__(self):\n        super(MNISTNet, self).__init__()\n        # Conv layer 1: 1 input channel, 32 output channels, 3x3 kernel\n        self.conv1 = nn.Conv2d(1, 32, kernel_size=3, padding=1)\n        # Conv layer 2: 32 input channels, 64 output channels, 3x3 kernel\n        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)\n        # ReLU activation (block: neural-networks.relu)\n        self.relu = nn.ReLU(inplace=False)\n        # MaxPool 2x2 (block: neural-networks.maxpool, kernel_size=2, stride=2)\n        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)\n        # FC layer 1 (block: neural-networks.dense-layer, in=64*7*7=3136, out=128)\n        # After conv1+pool: 28->14, after conv2+pool: 14->7, so 64*7*7=3136\n        self.fc1 = nn.Linear(in_features=64 * 7 * 7, out_features=128, bias=True)\n        # FC layer 2 (block: neural-networks.dense-layer, in=128, out=10)\n        self.fc2 = nn.Linear(in_features=128, out_features=10, bias=True)\n\n    def forward(self, x):\n        # Conv1 -> ReLU -> MaxPool\n        x = self.conv1(x)\n        x = self.relu(x)\n        x = self.pool(x)\n        # Conv2 -> ReLU -> MaxPool\n        x = self.conv2(x)\n        x = self.relu(x)\n        x = self.pool(x)\n        # Flatten\n        x = x.view(x.size(0), -1)\n        # FC1 -> ReLU\n        x = self.fc1(x)\n        x = self.relu(x)\n        # FC2 (output logits)\n        x = self.fc2(x)\n        return x\n\n\nmodel = MNISTNet().to(device)\n\n# Loss function (block: training.cross-entropy-loss)\ncriterion = nn.CrossEntropyLoss(label_smoothing=0, ignore_index=-100)\n\n# Optimizer (block: training.adam-optimizer, lr=0.001)\noptimizer = optim.Adam(\n    model.parameters(),\n    lr=0.001,\n    betas=(0.9, 0.999),\n    weight_decay=0,\n    eps=1e-08\n)\n\n\n# Function to compute accuracy (block: evaluation.accuracy)\ndef compute_accuracy(model, data_loader, device):\n    model.eval()\n    correct = 0\n    total = 0\n    with torch.no_grad():\n        for images, labels in data_loader:\n            images, labels = images.to(device), labels.to(device)\n            outputs = model(images)\n            _, predicted = torch.max(outputs, 1)\n            total += labels.size(0)\n            correct += (predicted == labels).sum().item()\n    accuracy = 100.0 * correct / total\n    return accuracy\n\n\n# Training loop (block: training.train-loop, num_epochs=10)\nnum_epochs = 10\nfor epoch in range(1, num_epochs + 1):\n    model.train()\n    running_loss = 0.0\n    num_batches = 0\n    for batch_idx, (images, labels) in enumerate(train_loader):\n        images, labels = images.to(device), labels.to(device)\n\n        # Forward pass\n        outputs = model(images)\n        loss = criterion(outputs, labels)\n\n        # Backward pass\n        optimizer.zero_grad()\n        loss.backward()\n\n        # Optimizer step\n        optimizer.step()\n\n        running_loss += loss.item()\n        num_batches += 1\n\n        if (batch_idx + 1) % 100 == 0:\n            print(f\"Epoch {epoch}, Batch {batch_idx+1}, Loss: {running_loss/(batch_idx+1):.4f}\")\n\n    avg_loss = running_loss / num_batches\n\n    # Compute train accuracy (block: evaluation.accuracy)\n    train_accuracy = compute_accuracy(model, train_loader, device)\n\n    # Compute test accuracy (block: evaluation.accuracy)\n    test_accuracy = compute_accuracy(model, test_loader, device)\n\n    print(f'Epoch [{epoch}/{num_epochs}], Loss: {avg_loss:.4f}, '\n          f'Train Accuracy: {train_accuracy:.2f}%, Test Accuracy: {test_accuracy:.2f}%')\n\nprint('Training complete.')",
+        "raw_stages": {
+          "stage1": {
+            "categories": [
+              "data-io",
+              "neural-networks",
+              "training",
+              "evaluation"
+            ],
+            "pattern": "deep_learning_train",
+            "search_terms": [
+              "PyTorch CNN",
+              "MNIST dataset",
+              "convolutional neural network",
+              "Adam optimizer",
+              "cross-entropy loss",
+              "max pooling",
+              "train test accuracy",
+              "epoch training loop"
+            ],
+            "metrics": {
+              "latency_s": 2.856,
+              "input_tokens": 317,
+              "output_tokens": 86,
+              "total_tokens": 403,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "retrieval": {
+            "blocks_retrieved": 60,
+            "catalog_chars": 7466,
+            "pattern": "deep_learning_train"
+          },
+          "stage2": {
+            "blocks_selected": 12,
+            "wiring_count": 4,
+            "metrics": {
+              "latency_s": 27.245,
+              "input_tokens": 3230,
+              "output_tokens": 2426,
+              "total_tokens": 5656,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "stage3_polish": {
+            "metrics": {
+              "latency_s": 12.752,
+              "input_tokens": 7589,
+              "output_tokens": 1476,
+              "total_tokens": 9065,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          }
+        },
+        "metrics": {
+          "total_calls": 3,
+          "total_latency_s": 42.853,
+          "total_input_tokens": 11136,
+          "total_output_tokens": 3988,
+          "total_tokens": 15124,
+          "per_call": [
+            {
+              "latency_s": 34.153,
+              "input_tokens": 128,
+              "output_tokens": 2831,
+              "total_tokens": 2959,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "Conv2d",
+            "MaxPool2d",
+            "CrossEntropyLoss",
+            "Adam"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 104,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      },
+      "vanilla": {
+        "method": "vanilla",
+        "challenge_id": "dl_04_mnist_cnn",
+        "code": "import torch\nimport torch.nn as nn\nimport torch.optim as optim\nfrom torch.utils.data import DataLoader\nfrom torchvision import datasets, transforms\n\n\n# Define the CNN architecture\nclass MNISTNet(nn.Module):\n    def __init__(self):\n        super(MNISTNet, self).__init__()\n        # Conv layer 1: 1 input channel -> 32 filters, 3x3 kernel\n        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1)\n        # Conv layer 2: 32 -> 64 filters, 3x3 kernel\n        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)\n        self.relu = nn.ReLU()\n        # After 2 rounds of pooling: 28x28 -> 14x14 -> 7x7, with 64 channels\n        self.fc1 = nn.Linear(64 * 7 * 7, 128)\n        self.fc2 = nn.Linear(128, 10)\n\n    def forward(self, x):\n        # Conv block 1: Conv -> ReLU -> MaxPool\n        x = self.pool(self.relu(self.conv1(x)))  # (B, 32, 14, 14)\n        # Conv block 2: Conv -> ReLU -> MaxPool\n        x = self.pool(self.relu(self.conv2(x)))  # (B, 64, 7, 7)\n        # Flatten\n        x = x.view(x.size(0), -1)  # (B, 64*7*7)\n        # FC layers\n        x = self.relu(self.fc1(x))  # (B, 128)\n        x = self.fc2(x)  # (B, 10) \u2014 raw logits\n        return x\n\n\ndef compute_accuracy(model, dataloader, device):\n    \"\"\"Compute accuracy over an entire dataloader.\"\"\"\n    model.eval()\n    correct = 0\n    total = 0\n    with torch.no_grad():\n        for images, labels in dataloader:\n            images, labels = images.to(device), labels.to(device)\n            outputs = model(images)\n            _, predicted = torch.max(outputs, dim=1)\n            total += labels.size(0)\n            correct += (predicted == labels).sum().item()\n    return 100.0 * correct / total\n\n\ndef main():\n    # Device configuration\n    device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n    print(f\"Using device: {device}\")\n\n    # Data transforms: convert to tensor and normalize\n    transform = transforms.Compose([\n        transforms.ToTensor(),\n        transforms.Normalize((0.1307,), (0.3081,))  # MNIST mean and std\n    ])\n\n    # Download and load MNIST dataset\n    train_dataset = datasets.MNIST(root=\"./data\", train=True, download=True, transform=transform)\n    test_dataset = datasets.MNIST(root=\"./data\", train=False, download=True, transform=transform)\n\n    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=2)\n    test_loader = DataLoader(test_dataset, batch_size=256, shuffle=False, num_workers=2)\n\n    # Initialize model, loss, optimizer\n    model = MNISTNet().to(device)\n    criterion = nn.CrossEntropyLoss()\n    optimizer = optim.Adam(model.parameters(), lr=0.001)\n\n    # Training loop\n    num_epochs = 10\n    for epoch in range(1, num_epochs + 1):\n        model.train()\n        running_loss = 0.0\n        for batch_idx, (images, labels) in enumerate(train_loader):\n            images, labels = images.to(device), labels.to(device)\n\n            # Forward pass\n            outputs = model(images)\n            loss = criterion(outputs, labels)\n\n            # Backward pass and optimize\n            optimizer.zero_grad()\n            loss.backward()\n            optimizer.step()\n\n            running_loss += loss.item()\n\n        avg_loss = running_loss / len(train_loader)\n        train_acc = compute_accuracy(model, train_loader, device)\n        test_acc = compute_accuracy(model, test_loader, device)\n\n        print(\n            f\"Epoch [{epoch:2d}/{num_epochs}] | \"\n            f\"Loss: {avg_loss:.4f} | \"\n            f\"Train Acc: {train_acc:.2f}% | \"\n            f\"Test Acc: {test_acc:.2f}%\"\n        )\n\n    print(\"\\nTraining complete.\")\n\n\nif __name__ == \"__main__\":\n    main()",
+        "raw_response": "\n\n```python\nimport torch\nimport torch.nn as nn\nimport torch.optim as optim\nfrom torch.utils.data import DataLoader\nfrom torchvision import datasets, transforms\n\n\n# Define the CNN architecture\nclass MNISTNet(nn.Module):\n    def __init__(self):\n        super(MNISTNet, self).__init__()\n        # Conv layer 1: 1 input channel -> 32 filters, 3x3 kernel\n        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1)\n        # Conv layer 2: 32 -> 64 filters, 3x3 kernel\n        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)\n        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)\n        self.relu = nn.ReLU()\n        # After 2 rounds of pooling: 28x28 -> 14x14 -> 7x7, with 64 channels\n        self.fc1 = nn.Linear(64 * 7 * 7, 128)\n        self.fc2 = nn.Linear(128, 10)\n\n    def forward(self, x):\n        # Conv block 1: Conv -> ReLU -> MaxPool\n        x = self.pool(self.relu(self.conv1(x)))  # (B, 32, 14, 14)\n        # Conv block 2: Conv -> ReLU -> MaxPool\n        x = self.pool(self.relu(self.conv2(x)))  # (B, 64, 7, 7)\n        # Flatten\n        x = x.view(x.size(0), -1)  # (B, 64*7*7)\n        # FC layers\n        x = self.relu(self.fc1(x))  # (B, 128)\n        x = self.fc2(x)  # (B, 10) \u2014 raw logits\n        return x\n\n\ndef compute_accuracy(model, dataloader, device):\n    \"\"\"Compute accuracy over an entire dataloader.\"\"\"\n    model.eval()\n    correct = 0\n    total = 0\n    with torch.no_grad():\n        for images, labels in dataloader:\n            images, labels = images.to(device), labels.to(device)\n            outputs = model(images)\n            _, predicted = torch.max(outputs, dim=1)\n            total += labels.size(0)\n            correct += (predicted == labels).sum().item()\n    return 100.0 * correct / total\n\n\ndef main():\n    # Device configuration\n    device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n    print(f\"Using device: {device}\")\n\n    # Data transforms: convert to tensor and normalize\n    transform = transforms.Compose([\n        transforms.ToTensor(),\n        transforms.Normalize((0.1307,), (0.3081,))  # MNIST mean and std\n    ])\n\n    # Download and load MNIST dataset\n    train_dataset = datasets.MNIST(root=\"./data\", train=True, download=True, transform=transform)\n    test_dataset = datasets.MNIST(root=\"./data\", train=False, download=True, transform=transform)\n\n    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True, num_workers=2)\n    test_loader = DataLoader(test_dataset, batch_size=256, shuffle=False, num_workers=2)\n\n    # Initialize model, loss, optimizer\n    model = MNISTNet().to(device)\n    criterion = nn.CrossEntropyLoss()\n    optimizer = optim.Adam(model.parameters(), lr=0.001)\n\n    # Training loop\n    num_epochs = 10\n    for epoch in range(1, num_epochs + 1):\n        model.train()\n        running_loss = 0.0\n        for batch_idx, (images, labels) in enumerate(train_loader):\n            images, labels = images.to(device), labels.to(device)\n\n            # Forward pass\n            outputs = model(images)\n            loss = criterion(outputs, labels)\n\n            # Backward pass and optimize\n            optimizer.zero_grad()\n            loss.backward()\n            optimizer.step()\n\n            running_loss += loss.item()\n\n        avg_loss = running_loss / len(train_loader)\n        train_acc = compute_accuracy(model, train_loader, device)\n        test_acc = compute_accuracy(model, test_loader, device)\n\n        print(\n            f\"Epoch [{epoch:2d}/{num_epochs}] | \"\n            f\"Loss: {avg_loss:.4f} | \"\n            f\"Train Acc: {train_acc:.2f}% | \"\n            f\"Test Acc: {test_acc:.2f}%\"\n        )\n\n    print(\"\\nTraining complete.\")\n\n\nif __name__ == \"__main__\":\n    main()\n```",
+        "metrics": {
+          "total_calls": 1,
+          "total_latency_s": 13.973,
+          "total_input_tokens": 116,
+          "total_output_tokens": 1230,
+          "total_tokens": 1346,
+          "per_call": [
+            {
+              "latency_s": 34.153,
+              "input_tokens": 128,
+              "output_tokens": 2831,
+              "total_tokens": 2959,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "Conv2d",
+            "MaxPool2d",
+            "CrossEntropyLoss",
+            "Adam"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 87,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      }
+    },
+    {
+      "id": "rag_10_basic",
+      "title": "Basic RAG Pipeline",
+      "prompt": "Build a RAG pipeline: load PDF documents with PyPDF2, chunk them (500 chars, 100 overlap), embed with sentence-transformers, store in ChromaDB, then implement a query function that retrieves top-3 chunks and passes them to an LLM (OpenAI API) with a system prompt for grounded answers.",
+      "blocks": {
+        "method": "blocks",
+        "challenge_id": "rag_10_basic",
+        "code": "import os\nimport PyPDF2\nimport chromadb\nfrom sentence_transformers import SentenceTransformer\nfrom openai import OpenAI\n\n# ============================================================\n# CONFIGURATION\n# ============================================================\nPDF_PATH = os.environ.get(\"PDF_PATH\", \"document.pdf\")\nCHUNK_SIZE = 500\nCHUNK_OVERLAP = 100\nEMBED_MODEL_NAME = \"all-MiniLM-L6-v2\"\nCHROMA_COLLECTION = \"pdf_chunks\"\nTOP_K = 3\nOPENAI_API_KEY = os.environ.get(\"OPENAI_API_KEY\", \"\")\nOPENAI_MODEL = os.environ.get(\"OPENAI_MODEL\", \"gpt-4o\")\n\nSYSTEM_PROMPT = (\n    \"You are a helpful assistant that answers questions based strictly on the \"\n    \"provided context. If the context does not contain enough information to \"\n    \"answer the question, say so. Do not make up information. Always ground \"\n    \"your answers in the retrieved context passages.\"\n)\n\n\n# ============================================================\n# STEP 1 \u2014 Load PDF with PyPDF2\n# ============================================================\ndef load_pdf(file_path: str) -> str:\n    \"\"\"Block ref=a: data-io.load-pdf\"\"\"\n    text = \"\"\n    with open(file_path, \"rb\") as f:\n        reader = PyPDF2.PdfReader(f)\n        for page in reader.pages:\n            page_text = page.extract_text()\n            if page_text:\n                text += page_text + \"\\n\"\n    print(f\"[load-pdf] Loaded {len(reader.pages)} pages, {len(text)} chars\")\n    return text\n\n\n# ============================================================\n# STEP 2 \u2014 Chunk text (500 chars, 100 overlap)\n# ============================================================\ndef chunk_text(\n    text: str,\n    chunk_size: int = CHUNK_SIZE,\n    chunk_overlap: int = CHUNK_OVERLAP,\n) -> list:\n    \"\"\"Block ref=b: text-nlp.chunk-text\"\"\"\n    chunks = []\n    start = 0\n    while start < len(text):\n        end = start + chunk_size\n        chunk = text[start:end]\n        if chunk.strip():\n            chunks.append(chunk)\n        start += chunk_size - chunk_overlap\n    print(\n        f\"[chunk-text] Created {len(chunks)} chunks \"\n        f\"(size={chunk_size}, overlap={chunk_overlap})\"\n    )\n    return chunks\n\n\n# ============================================================\n# STEP 3 \u2014 Embed with sentence-transformers\n# ============================================================\ndef embed_texts(texts: list, model_name: str = EMBED_MODEL_NAME):\n    \"\"\"Block ref=c: embeddings-retrieval.text-embed\"\"\"\n    model = SentenceTransformer(model_name)\n    embeddings = model.encode(\n        texts, normalize_embeddings=True, show_progress_bar=True\n    )\n    print(f\"[text-embed] Embedded {len(texts)} texts -> dim={embeddings.shape[1]}\")\n    return model, embeddings.tolist()\n\n\n# ============================================================\n# STEP 4 \u2014 Store in ChromaDB\n# ============================================================\ndef store_in_chromadb(\n    chunks: list,\n    embeddings: list,\n    collection_name: str = CHROMA_COLLECTION,\n):\n    \"\"\"Vector store insert into ChromaDB.\"\"\"\n    client = chromadb.Client()  # ephemeral in-memory; use PersistentClient for disk\n    # Delete collection if it already exists to allow re-runs\n    try:\n        client.delete_collection(name=collection_name)\n    except Exception:\n        pass\n    collection = client.create_collection(\n        name=collection_name,\n        metadata={\"hnsw:space\": \"cosine\"},\n    )\n    ids = [f\"chunk_{i}\" for i in range(len(chunks))]\n    collection.add(ids=ids, documents=chunks, embeddings=embeddings)\n    print(\n        f\"[chromadb-store] Stored {len(chunks)} chunks in collection '{collection_name}'\"\n    )\n    return client, collection\n\n\n# ============================================================\n# STEP 5 \u2014 Query function: retrieve top-3 + LLM answer\n# ============================================================\ndef query_rag(\n    question: str,\n    collection,\n    embed_model,\n    top_k: int = TOP_K,\n) -> str:\n    \"\"\"Block ref=d+e+f: retrieve chunks, build prompt, call LLM.\"\"\"\n    # 5a. Embed the query\n    query_embedding = embed_model.encode(\n        [question], normalize_embeddings=True\n    ).tolist()\n\n    # 5b. Retrieve top-k chunks from ChromaDB\n    results = collection.query(\n        query_embeddings=query_embedding,\n        n_results=top_k,\n        include=[\"documents\", \"distances\"],\n    )\n    retrieved_docs = results[\"documents\"][0]\n    distances = results[\"distances\"][0]\n\n    print(\n        f\"\\n[vector-db-query] Retrieved {len(retrieved_docs)} chunks \"\n        f\"for query: '{question}'\"\n    )\n    for i, (doc, dist) in enumerate(zip(retrieved_docs, distances)):\n        print(f\"  Chunk {i+1} (distance={dist:.4f}): {doc[:80]}...\")\n\n    # 5c. Build context string\n    context = \"\\n\\n---\\n\\n\".join(\n        [f\"[Passage {i+1}]\\n{doc}\" for i, doc in enumerate(retrieved_docs)]\n    )\n\n    # 5d. System prompt (block ref=e) + user prompt (block ref=f)\n    system_prompt = {\"role\": \"system\", \"content\": SYSTEM_PROMPT}\n    user_prompt = {\n        \"role\": \"user\",\n        \"content\": (\n            f\"Context:\\n{context}\\n\\n\"\n            f\"Question: {question}\\n\\n\"\n            \"Answer based only on the context above:\"\n        ),\n    }\n    messages = [system_prompt, user_prompt]\n\n    # 5e. Call OpenAI API\n    openai_client = OpenAI(api_key=OPENAI_API_KEY)\n    response = openai_client.chat.completions.create(\n        model=OPENAI_MODEL,\n        messages=messages,\n        temperature=0.2,\n        max_tokens=1024,\n    )\n    answer = response.choices[0].message.content\n    print(f\"\\n[llm-response] {answer}\")\n    return answer\n\n\n# ============================================================\n# MAIN \u2014 Run the full RAG pipeline\n# ============================================================\ndef main():\n    print(\"=\" * 60)\n    print(\"RAG PIPELINE \u2014 PDF -> Chunk -> Embed -> ChromaDB -> Query\")\n    print(\"=\" * 60)\n\n    # Step 1: Load PDF\n    raw_text = load_pdf(PDF_PATH)\n\n    # Step 2: Chunk\n    chunks = chunk_text(raw_text, CHUNK_SIZE, CHUNK_OVERLAP)\n\n    # Step 3: Embed\n    embed_model, embeddings = embed_texts(chunks, EMBED_MODEL_NAME)\n\n    # Step 4: Store in ChromaDB\n    chroma_client, collection = store_in_chromadb(\n        chunks, embeddings, CHROMA_COLLECTION\n    )\n\n    # Step 5: Interactive query loop\n    print(\"\\n\" + \"=\" * 60)\n    print(\"RAG pipeline ready. Enter your questions (type 'quit' to exit):\")\n    print(\"=\" * 60)\n    while True:\n        question = input(\"\\nQuestion: \").strip()\n        if not question or question.lower() in (\"quit\", \"exit\", \"q\"):\n            print(\"Goodbye!\")\n            break\n        answer = query_rag(question, collection, embed_model, TOP_K)\n        print(f\"\\nAnswer: {answer}\")\n\n\nif __name__ == \"__main__\":\n    main()",
+        "raw_stages": {
+          "stage1": {
+            "categories": [
+              "data-io",
+              "data-processing",
+              "text-nlp",
+              "embeddings-retrieval",
+              "prompt-engineering",
+              "agents",
+              "transformers-llms"
+            ],
+            "pattern": "rag_pipeline",
+            "search_terms": [
+              "PDF document loader PyPDF2",
+              "text chunking overlap",
+              "sentence-transformers embeddings",
+              "ChromaDB vector store",
+              "retrieval augmented generation",
+              "OpenAI LLM API",
+              "RAG system prompt grounded",
+              "top-k similarity search"
+            ],
+            "metrics": {
+              "latency_s": 3.238,
+              "input_tokens": 329,
+              "output_tokens": 125,
+              "total_tokens": 454,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "retrieval": {
+            "blocks_retrieved": 60,
+            "catalog_chars": 8918,
+            "pattern": "rag_pipeline"
+          },
+          "stage2": {
+            "blocks_selected": 6,
+            "wiring_count": 3,
+            "metrics": {
+              "latency_s": 38.205,
+              "input_tokens": 3727,
+              "output_tokens": 3128,
+              "total_tokens": 6855,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "stage3_polish": {
+            "metrics": {
+              "latency_s": 18.157,
+              "input_tokens": 7532,
+              "output_tokens": 1987,
+              "total_tokens": 9519,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          }
+        },
+        "metrics": {
+          "total_calls": 3,
+          "total_latency_s": 59.6,
+          "total_input_tokens": 11588,
+          "total_output_tokens": 5240,
+          "total_tokens": 16828,
+          "per_call": [
+            {
+              "latency_s": 34.153,
+              "input_tokens": 128,
+              "output_tokens": 2831,
+              "total_tokens": 2959,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "ChromaDB",
+            "chunk",
+            "embed",
+            "retrieve",
+            "system"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 178,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      },
+      "vanilla": {
+        "method": "vanilla",
+        "challenge_id": "rag_10_basic",
+        "code": "\"\"\"\nProduction-quality RAG pipeline:\n- Load PDFs with PyPDF2\n- Chunk text (500 chars, 100 overlap)\n- Embed with sentence-transformers\n- Store in ChromaDB\n- Query: retrieve top-3 chunks \u2192 OpenAI LLM for grounded answers\n\"\"\"\n\nimport os\nimport uuid\nfrom typing import Optional\n\nimport PyPDF2\nimport chromadb\nfrom chromadb.utils import embedding_functions\nfrom openai import OpenAI\n\n\n# ---------------------------------------------------------------------------\n# 1. PDF Loading\n# ---------------------------------------------------------------------------\ndef load_pdf(pdf_path: str) -> str:\n    \"\"\"Extract all text from a PDF file.\"\"\"\n    if not os.path.isfile(pdf_path):\n        raise FileNotFoundError(f\"PDF not found: {pdf_path}\")\n\n    text_parts: list[str] = []\n    with open(pdf_path, \"rb\") as f:\n        reader = PyPDF2.PdfReader(f)\n        for page in reader.pages:\n            page_text = page.extract_text()\n            if page_text:\n                text_parts.append(page_text)\n    return \"\\n\".join(text_parts)\n\n\ndef load_pdfs(pdf_paths: list[str]) -> dict[str, str]:\n    \"\"\"Load multiple PDFs; returns {path: full_text}.\"\"\"\n    return {p: load_pdf(p) for p in pdf_paths}\n\n\n# ---------------------------------------------------------------------------\n# 2. Chunking\n# ---------------------------------------------------------------------------\ndef chunk_text(\n    text: str,\n    chunk_size: int = 500,\n    overlap: int = 100,\n) -> list[str]:\n    \"\"\"Split text into overlapping chunks of `chunk_size` characters.\"\"\"\n    if chunk_size <= 0:\n        raise ValueError(\"chunk_size must be > 0\")\n    if overlap < 0 or overlap >= chunk_size:\n        raise ValueError(\"overlap must be >= 0 and < chunk_size\")\n\n    chunks: list[str] = []\n    start = 0\n    while start < len(text):\n        end = start + chunk_size\n        chunk = text[start:end].strip()\n        if chunk:  # skip empty chunks\n            chunks.append(chunk)\n        start += chunk_size - overlap\n    return chunks\n\n\n# ---------------------------------------------------------------------------\n# 3. Embedding + ChromaDB storage\n# ---------------------------------------------------------------------------\nclass RAGPipeline:\n    \"\"\"End-to-end Retrieval-Augmented Generation pipeline.\"\"\"\n\n    SYSTEM_PROMPT = (\n        \"You are a helpful assistant that answers questions based strictly on \"\n        \"the provided context. If the context does not contain enough information \"\n        \"to answer, say so clearly. Do not make up facts.\\n\\n\"\n        \"Context:\\n{context}\"\n    )\n\n    def __init__(\n        self,\n        collection_name: str = \"rag_collection\",\n        embedding_model: str = \"all-MiniLM-L6-v2\",\n        openai_model: str = \"gpt-3.5-turbo\",\n        openai_api_key: Optional[str] = None,\n        chroma_persist_directory: Optional[str] = None,\n        chunk_size: int = 500,\n        chunk_overlap: int = 100,\n        top_k: int = 3,\n    ):\n        self.chunk_size = chunk_size\n        self.chunk_overlap = chunk_overlap\n        self.top_k = top_k\n        self.openai_model = openai_model\n\n        # --- Sentence-transformer embedding function for Chroma ---\n        self._ef = embedding_functions.SentenceTransformerEmbeddingFunction(\n            model_name=embedding_model,\n        )\n\n        # --- ChromaDB client ---\n        if chroma_persist_directory:\n            self._chroma_client = chromadb.PersistentClient(\n                path=chroma_persist_directory,\n            )\n        else:\n            self._chroma_client = chromadb.Client()  # in-memory\n\n        # Get or create collection with the chosen embedding function\n        self._collection = self._chroma_client.get_or_create_collection(\n            name=collection_name,\n            embedding_function=self._ef,\n            metadata={\"hnsw:space\": \"cosine\"},\n        )\n\n        # --- OpenAI client ---\n        api_key = openai_api_key or os.getenv(\"OPENAI_API_KEY\")\n        if not api_key:\n            raise EnvironmentError(\n                \"Set OPENAI_API_KEY env var or pass openai_api_key explicitly.\"\n            )\n        self._openai = OpenAI(api_key=api_key)\n\n    # ---- Ingestion --------------------------------------------------------\n    def ingest_pdf(self, pdf_path: str) -> int:\n        \"\"\"Load a single PDF, chunk it, embed & store. Returns chunk count.\"\"\"\n        text = load_pdf(pdf_path)\n        return self._ingest_text(text, source=pdf_path)\n\n    def ingest_pdfs(self, pdf_paths: list[str]) -> int:\n        \"\"\"Ingest multiple PDFs. Returns total chunk count.\"\"\"\n        total = 0\n        for p in pdf_paths:\n            total += self.ingest_pdf(p)\n        return total\n\n    def ingest_text(self, text: str, source: str = \"manual\") -> int:\n        \"\"\"Ingest raw text (useful for testing without PDFs).\"\"\"\n        return self._ingest_text(text, source=source)\n\n    def _ingest_text(self, text: str, source: str) -> int:\n        chunks = chunk_text(text, self.chunk_size, self.chunk_overlap)\n        if not chunks:\n            return 0\n\n        ids = [str(uuid.uuid4()) for _ in chunks]\n        metadatas = [\n            {\"source\": source, \"chunk_index\": i} for i in range(len(chunks))\n        ]\n\n        # Chroma's add() will call the embedding function automatically\n        self._collection.add(\n            ids=ids,\n            documents=chunks,\n            metadatas=metadatas,\n        )\n        return len(chunks)\n\n    # ---- Retrieval --------------------------------------------------------\n    def retrieve(self, query: str, top_k: Optional[int] = None) -> list[dict]:\n        \"\"\"Return top-k most relevant chunks for `query`.\"\"\"\n        k = top_k or self.top_k\n        results = self._collection.query(\n            query_texts=[query],\n            n_results=k,\n            include=[\"documents\", \"metadatas\", \"distances\"],\n        )\n\n        retrieved: list[dict] = []\n        # results fields are lists-of-lists (one inner list per query)\n        for doc, meta, dist in zip(\n            results[\"documents\"][0],\n            results[\"metadatas\"][0],\n            results[\"distances\"][0],\n        ):\n            retrieved.append(\n                {\"document\": doc, \"metadata\": meta, \"distance\": dist}\n            )\n        return retrieved\n\n    # ---- Generation -------------------------------------------------------\n    def query(\n        self,\n        question: str,\n        top_k: Optional[int] = None,\n        temperature: float = 0.2,\n    ) -> dict:\n        \"\"\"\n        Full RAG query:\n        1. Retrieve top-k chunks\n        2. Build grounded prompt\n        3. Call OpenAI chat completion\n        Returns dict with 'answer', 'sources', and 'chunks'.\n        \"\"\"\n        chunks = self.retrieve(question, top_k=top_k)\n\n        if not chunks:\n            return {\n                \"answer\": \"No relevant documents found in the knowledge base.\",\n                \"sources\": [],\n                \"chunks\": [],\n            }\n\n        # Build context block\n        context_parts = []\n        for i, c in enumerate(chunks, 1):\n            context_parts.append(\n                f\"[{i}] (source: {c['metadata'].get('source', 'unknown')}) \"\n                f\"{c['document']}\"\n            )\n        context = \"\\n\\n\".join(context_parts)\n\n        system_message = self.SYSTEM_PROMPT.format(context=context)\n\n        # Call OpenAI\n        response = self._openai.chat.completions.create(\n            model=self.openai_model,\n            temperature=temperature,\n            messages=[\n                {\"role\": \"system\", \"content\": system_message},\n                {\"role\": \"user\", \"content\": question},\n            ],\n        )\n\n        answer = response.choices[0].message.content.strip()\n\n        sources = list(\n            {c[\"metadata\"].get(\"source\", \"unknown\") for c in chunks}\n        )\n\n        return {\n            \"answer\": answer,\n            \"sources\": sources,\n            \"chunks\": [c[\"document\"] for c in chunks],\n        }\n\n    # ---- Utility ----------------------------------------------------------\n    def collection_count(self) -> int:\n        \"\"\"Number of chunks currently stored.\"\"\"\n        return self._collection.count()\n\n    def reset_collection(self) -> None:\n        \"\"\"Delete all documents in the collection.\"\"\"\n        self._chroma_client.delete_collection(self._collection.name)\n        self._collection = self._chroma_client.get_or_create_collection(\n            name=self._collection.name,\n            embedding_function=self._ef,\n            metadata={\"hnsw:space\": \"cosine\"},\n        )\n\n\n# ---------------------------------------------------------------------------\n# Example usage / CLI\n# ---------------------------------------------------------------------------\nif __name__ == \"__main__\":\n    import argparse\n\n    parser = argparse.ArgumentParser(description=\"RAG Pipeline CLI\")\n    sub = parser.add_subparsers(dest=\"command\")\n\n    # ingest sub-command\n    ingest_p = sub.add_parser(\"ingest\", help=\"Ingest PDF(s)\")\n    ingest_p.add_argument(\"pdfs\", nargs=\"+\", help=\"PDF file paths\")\n    ingest_p.add_argument(\n        \"--persist-dir\", default=None, help=\"ChromaDB persist directory\"\n    )\n\n    # query sub-command\n    query_p = sub.add_parser(\"query\", help=\"Ask a question\")\n    query_p.add_argument(\"question\", help=\"Your question\")\n    query_p.add_argument(\n        \"--persist-dir\", default=None, help=\"ChromaDB persist directory\"\n    )\n    query_p.add_argument(\n        \"--model\", default=\"gpt-3.5-turbo\", help=\"OpenAI model\"\n    )\n\n    args = parser.parse_args()\n\n    if args.command == \"ingest\":\n        rag = RAGPipeline(chroma_persist_directory=args.persist_dir)\n        count = rag.ingest_pdfs(args.pdfs)\n        print(f\"Ingested {count} chunks from {len(args.pdfs)} PDF(s).\")\n        print(f\"Total chunks in collection: {rag.collection_count()}\")\n\n    elif args.command == \"query\":\n        rag = RAGPipeline(\n            chroma_persist_directory=args.persist_dir,\n            openai_model=args.model,\n        )\n        result = rag.query(args.question)\n        print(\"=\" * 60)\n        print(\"ANSWER:\")\n        print(result[\"answer\"])\n        print(\"-\" * 60)\n        print(\"SOURCES:\", result[\"sources\"])\n        print(\"RETRIEVED CHUNKS:\")\n        for i, chunk in enumerate(result[\"chunks\"], 1):\n            print(f\"  [{i}] {chunk[:120]}...\")\n    else:\n        parser.print_help()",
+        "raw_response": "\n\n```python\n\"\"\"\nProduction-quality RAG pipeline:\n- Load PDFs with PyPDF2\n- Chunk text (500 chars, 100 overlap)\n- Embed with sentence-transformers\n- Store in ChromaDB\n- Query: retrieve top-3 chunks \u2192 OpenAI LLM for grounded answers\n\"\"\"\n\nimport os\nimport uuid\nfrom typing import Optional\n\nimport PyPDF2\nimport chromadb\nfrom chromadb.utils import embedding_functions\nfrom openai import OpenAI\n\n\n# ---------------------------------------------------------------------------\n# 1. PDF Loading\n# ---------------------------------------------------------------------------\ndef load_pdf(pdf_path: str) -> str:\n    \"\"\"Extract all text from a PDF file.\"\"\"\n    if not os.path.isfile(pdf_path):\n        raise FileNotFoundError(f\"PDF not found: {pdf_path}\")\n\n    text_parts: list[str] = []\n    with open(pdf_path, \"rb\") as f:\n        reader = PyPDF2.PdfReader(f)\n        for page in reader.pages:\n            page_text = page.extract_text()\n            if page_text:\n                text_parts.append(page_text)\n    return \"\\n\".join(text_parts)\n\n\ndef load_pdfs(pdf_paths: list[str]) -> dict[str, str]:\n    \"\"\"Load multiple PDFs; returns {path: full_text}.\"\"\"\n    return {p: load_pdf(p) for p in pdf_paths}\n\n\n# ---------------------------------------------------------------------------\n# 2. Chunking\n# ---------------------------------------------------------------------------\ndef chunk_text(\n    text: str,\n    chunk_size: int = 500,\n    overlap: int = 100,\n) -> list[str]:\n    \"\"\"Split text into overlapping chunks of `chunk_size` characters.\"\"\"\n    if chunk_size <= 0:\n        raise ValueError(\"chunk_size must be > 0\")\n    if overlap < 0 or overlap >= chunk_size:\n        raise ValueError(\"overlap must be >= 0 and < chunk_size\")\n\n    chunks: list[str] = []\n    start = 0\n    while start < len(text):\n        end = start + chunk_size\n        chunk = text[start:end].strip()\n        if chunk:  # skip empty chunks\n            chunks.append(chunk)\n        start += chunk_size - overlap\n    return chunks\n\n\n# ---------------------------------------------------------------------------\n# 3. Embedding + ChromaDB storage\n# ---------------------------------------------------------------------------\nclass RAGPipeline:\n    \"\"\"End-to-end Retrieval-Augmented Generation pipeline.\"\"\"\n\n    SYSTEM_PROMPT = (\n        \"You are a helpful assistant that answers questions based strictly on \"\n        \"the provided context. If the context does not contain enough information \"\n        \"to answer, say so clearly. Do not make up facts.\\n\\n\"\n        \"Context:\\n{context}\"\n    )\n\n    def __init__(\n        self,\n        collection_name: str = \"rag_collection\",\n        embedding_model: str = \"all-MiniLM-L6-v2\",\n        openai_model: str = \"gpt-3.5-turbo\",\n        openai_api_key: Optional[str] = None,\n        chroma_persist_directory: Optional[str] = None,\n        chunk_size: int = 500,\n        chunk_overlap: int = 100,\n        top_k: int = 3,\n    ):\n        self.chunk_size = chunk_size\n        self.chunk_overlap = chunk_overlap\n        self.top_k = top_k\n        self.openai_model = openai_model\n\n        # --- Sentence-transformer embedding function for Chroma ---\n        self._ef = embedding_functions.SentenceTransformerEmbeddingFunction(\n            model_name=embedding_model,\n        )\n\n        # --- ChromaDB client ---\n        if chroma_persist_directory:\n            self._chroma_client = chromadb.PersistentClient(\n                path=chroma_persist_directory,\n            )\n        else:\n            self._chroma_client = chromadb.Client()  # in-memory\n\n        # Get or create collection with the chosen embedding function\n        self._collection = self._chroma_client.get_or_create_collection(\n            name=collection_name,\n            embedding_function=self._ef,\n            metadata={\"hnsw:space\": \"cosine\"},\n        )\n\n        # --- OpenAI client ---\n        api_key = openai_api_key or os.getenv(\"OPENAI_API_KEY\")\n        if not api_key:\n            raise EnvironmentError(\n                \"Set OPENAI_API_KEY env var or pass openai_api_key explicitly.\"\n            )\n        self._openai = OpenAI(api_key=api_key)\n\n    # ---- Ingestion --------------------------------------------------------\n    def ingest_pdf(self, pdf_path: str) -> int:\n        \"\"\"Load a single PDF, chunk it, embed & store. Returns chunk count.\"\"\"\n        text = load_pdf(pdf_path)\n        return self._ingest_text(text, source=pdf_path)\n\n    def ingest_pdfs(self, pdf_paths: list[str]) -> int:\n        \"\"\"Ingest multiple PDFs. Returns total chunk count.\"\"\"\n        total = 0\n        for p in pdf_paths:\n            total += self.ingest_pdf(p)\n        return total\n\n    def ingest_text(self, text: str, source: str = \"manual\") -> int:\n        \"\"\"Ingest raw text (useful for testing without PDFs).\"\"\"\n        return self._ingest_text(text, source=source)\n\n    def _ingest_text(self, text: str, source: str) -> int:\n        chunks = chunk_text(text, self.chunk_size, self.chunk_overlap)\n        if not chunks:\n            return 0\n\n        ids = [str(uuid.uuid4()) for _ in chunks]\n        metadatas = [\n            {\"source\": source, \"chunk_index\": i} for i in range(len(chunks))\n        ]\n\n        # Chroma's add() will call the embedding function automatically\n        self._collection.add(\n            ids=ids,\n            documents=chunks,\n            metadatas=metadatas,\n        )\n        return len(chunks)\n\n    # ---- Retrieval --------------------------------------------------------\n    def retrieve(self, query: str, top_k: Optional[int] = None) -> list[dict]:\n        \"\"\"Return top-k most relevant chunks for `query`.\"\"\"\n        k = top_k or self.top_k\n        results = self._collection.query(\n            query_texts=[query],\n            n_results=k,\n            include=[\"documents\", \"metadatas\", \"distances\"],\n        )\n\n        retrieved: list[dict] = []\n        # results fields are lists-of-lists (one inner list per query)\n        for doc, meta, dist in zip(\n            results[\"documents\"][0],\n            results[\"metadatas\"][0],\n            results[\"distances\"][0],\n        ):\n            retrieved.append(\n                {\"document\": doc, \"metadata\": meta, \"distance\": dist}\n            )\n        return retrieved\n\n    # ---- Generation -------------------------------------------------------\n    def query(\n        self,\n        question: str,\n        top_k: Optional[int] = None,\n        temperature: float = 0.2,\n    ) -> dict:\n        \"\"\"\n        Full RAG query:\n        1. Retrieve top-k chunks\n        2. Build grounded prompt\n        3. Call OpenAI chat completion\n        Returns dict with 'answer', 'sources', and 'chunks'.\n        \"\"\"\n        chunks = self.retrieve(question, top_k=top_k)\n\n        if not chunks:\n            return {\n                \"answer\": \"No relevant documents found in the knowledge base.\",\n                \"sources\": [],\n                \"chunks\": [],\n            }\n\n        # Build context block\n        context_parts = []\n        for i, c in enumerate(chunks, 1):\n            context_parts.append(\n                f\"[{i}] (source: {c['metadata'].get('source', 'unknown')}) \"\n                f\"{c['document']}\"\n            )\n        context = \"\\n\\n\".join(context_parts)\n\n        system_message = self.SYSTEM_PROMPT.format(context=context)\n\n        # Call OpenAI\n        response = self._openai.chat.completions.create(\n            model=self.openai_model,\n            temperature=temperature,\n            messages=[\n                {\"role\": \"system\", \"content\": system_message},\n                {\"role\": \"user\", \"content\": question},\n            ],\n        )\n\n        answer = response.choices[0].message.content.strip()\n\n        sources = list(\n            {c[\"metadata\"].get(\"source\", \"unknown\") for c in chunks}\n        )\n\n        return {\n            \"answer\": answer,\n            \"sources\": sources,\n            \"chunks\": [c[\"document\"] for c in chunks],\n        }\n\n    # ---- Utility ----------------------------------------------------------\n    def collection_count(self) -> int:\n        \"\"\"Number of chunks currently stored.\"\"\"\n        return self._collection.count()\n\n    def reset_collection(self) -> None:\n        \"\"\"Delete all documents in the collection.\"\"\"\n        self._chroma_client.delete_collection(self._collection.name)\n        self._collection = self._chroma_client.get_or_create_collection(\n            name=self._collection.name,\n            embedding_function=self._ef,\n            metadata={\"hnsw:space\": \"cosine\"},\n        )\n\n\n# ---------------------------------------------------------------------------\n# Example usage / CLI\n# ---------------------------------------------------------------------------\nif __name__ == \"__main__\":\n    import argparse\n\n    parser = argparse.ArgumentParser(description=\"RAG Pipeline CLI\")\n    sub = parser.add_subparsers(dest=\"command\")\n\n    # ingest sub-command\n    ingest_p = sub.add_parser(\"ingest\", help=\"Ingest PDF(s)\")\n    ingest_p.add_argument(\"pdfs\", nargs=\"+\", help=\"PDF file paths\")\n    ingest_p.add_argument(\n        \"--persist-dir\", default=None, help=\"ChromaDB persist directory\"\n    )\n\n    # query sub-command\n    query_p = sub.add_parser(\"query\", help=\"Ask a question\")\n    query_p.add_argument(\"question\", help=\"Your question\")\n    query_p.add_argument(\n        \"--persist-dir\", default=None, help=\"ChromaDB persist directory\"\n    )\n    query_p.add_argument(\n        \"--model\", default=\"gpt-3.5-turbo\", help=\"OpenAI model\"\n    )\n\n    args = parser.parse_args()\n\n    if args.command == \"ingest\":\n        rag = RAGPipeline(chroma_persist_directory=args.persist_dir)\n        count = rag.ingest_pdfs(args.pdfs)\n        print(f\"Ingested {count} chunks from {len(args.pdfs)} PDF(s).\")\n        print(f\"Total chunks in collection: {rag.collection_count()}\")\n\n    elif args.command == \"query\":\n        rag = RAGPipeline(\n            chroma_persist_directory=args.persist_dir,\n            openai_model=args.model,\n        )\n        result = rag.query(args.question)\n        print(\"=\" * 60)\n        print(\"ANSWER:\")\n        print(result[\"answer\"])\n        print(\"-\" * 60)\n        print(\"SOURCES:\", result[\"sources\"])\n        print(\"RETRIEVED CHUNKS:\")\n        for i, chunk in enumerate(result[\"chunks\"], 1):\n            print(f\"  [{i}] {chunk[:120]}...\")\n    else:\n        parser.print_help()\n```",
+        "metrics": {
+          "total_calls": 1,
+          "total_latency_s": 34.153,
+          "total_input_tokens": 128,
+          "total_output_tokens": 2831,
+          "total_tokens": 2959,
+          "per_call": [
+            {
+              "latency_s": 34.153,
+              "input_tokens": 128,
+              "output_tokens": 2831,
+              "total_tokens": 2959,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 0.8,
+          "has_imports": false,
+          "has_keywords": true,
+          "keyword_hits": [
+            "ChromaDB",
+            "chunk",
+            "embed",
+            "retrieve",
+            "system"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 258,
+          "syntax_valid": true,
+          "completeness": 0.8
+        }
+      }
+    }
+  ]
+}

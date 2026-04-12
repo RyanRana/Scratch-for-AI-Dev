@@ -1,0 +1,24 @@
+{
+  "name": "ai-blocks",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scratch-like drag-and-drop visual programming for AI/ML engineering",
+  "scripts": {
+    "build": "turbo run build",
+    "build:extension": "pnpm --filter @ai-blocks/web run build:extension && pnpm --filter ai-blocks-vscode run compile",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "validate-blocks": "pnpm --filter block-validator run validate",
+    "gen-block": "pnpm --filter block-generator run generate"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}

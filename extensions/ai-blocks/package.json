@@ -1,0 +1,40 @@
+{
+  "name": "ai-blocks-vscode",
+  "displayName": "AI Blocks",
+  "description": "Visual AI/ML pipeline builder (block graph editor) in a webview panel.",
+  "version": "0.1.0",
+  "publisher": "ai-blocks",
+  "private": true,
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:ai-blocks.open"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-blocks.open",
+        "title": "AI Blocks: Open Editor",
+        "category": "AI Blocks"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build:webview": "pnpm --dir ../../apps/web run build:extension",
+    "vscode:prepublish": "pnpm run build:webview && pnpm run compile",
+    "package": "pnpm run vscode:prepublish && pnpm dlx @vscode/vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}

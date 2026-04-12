@@ -1,0 +1,678 @@
+AI ENGINEERING BLOCKS TAXONOMY
+================================
+~450+ blocks across 20 categories
+For a Scratch-like drag-and-drop AI engineering tool (web + VS Code extension)
+
+
+================================================================================
+1. CONTROL FLOW
+   Logic & program structure
+================================================================================
+Start
+End
+If / Else
+Switch / Case
+For Loop
+While Loop
+Break
+Continue
+Try / Catch
+Raise Error
+Assert
+Return
+Pass
+Comment
+Log / Print
+Timer / Delay
+
+
+================================================================================
+2. DATA I/O
+   Load, save, stream data
+================================================================================
+Load CSV
+Load JSON
+Load Parquet
+Load Image
+Load Audio
+Load Video
+Load PDF
+Load from DB
+Load from API
+Stream Input
+Save to File
+Save to DB
+Upload to S3
+Download URL
+Websocket Input
+Kafka Consumer
+Kafka Producer
+gRPC Call
+
+
+================================================================================
+3. DATA PROCESSING
+   Transform, clean, reshape
+================================================================================
+Filter Rows
+Select Columns
+Rename Column
+Drop Nulls
+Fill Nulls
+Deduplicate
+Sort
+Group By
+Aggregate
+Join / Merge
+Pivot
+Melt / Unpivot
+Sample
+Train/Val/Test Split
+K-Fold Split
+Stratified Split
+Shuffle
+Batch
+Window Slide
+Normalize
+Standardize
+Min-Max Scale
+Clip Values
+Cast Type
+One-Hot Encode
+Label Encode
+Ordinal Encode
+Target Encode
+Bin / Discretize
+PCA
+UMAP
+t-SNE
+ICA
+SVD
+Feature Selection
+Correlation Filter
+Variance Threshold
+Mutual Info Filter
+
+
+================================================================================
+4. TEXT & NLP
+   Tokenize, embed, parse
+================================================================================
+Tokenize
+Detokenize
+Chunk Text
+Sentence Split
+Regex Extract
+Named Entity Recognition
+POS Tagging
+Dependency Parse
+Coreference Resolution
+Text Clean
+Lowercase
+Remove Stopwords
+Stem
+Lemmatize
+Language Detect
+Translate
+Summarize Text
+Extract Keywords
+Sentiment Score
+TF-IDF Vectorize
+BM25 Score
+Spell Check
+Disfluency Remove
+Word Count
+Readability Score
+
+
+================================================================================
+5. EMBEDDINGS & RETRIEVAL
+   Vector search & RAG
+================================================================================
+Text Embed
+Image Embed
+Audio Embed
+Multimodal Embed
+Cross-Encoder Score
+Cosine Similarity
+Dot Product
+Euclidean Distance
+ANN Search (HNSW)
+Exact KNN Search
+Vector DB Upsert
+Vector DB Query
+Hybrid Search
+Rerank Results
+Build Index
+Chunk & Embed Pipeline
+Sparse Retrieval (BM25)
+Dense + Sparse Fusion
+Query Expansion
+Hypothetical Document Embed (HyDE)
+Parent-Child Chunking
+Sliding Window Chunk
+
+
+================================================================================
+6. CLASSICAL ML MODELS
+   From linear regression to ensembles
+================================================================================
+Linear Regression
+Ridge Regression
+Lasso Regression
+Elastic Net
+Logistic Regression
+Naive Bayes
+k-Nearest Neighbors
+Decision Tree
+Random Forest
+Gradient Boosting (GBM)
+XGBoost
+LightGBM
+CatBoost
+AdaBoost
+Bagging Ensemble
+Stacking Ensemble
+Voting Ensemble
+SVM (Classifier)
+SVM (Regressor)
+SVR
+K-Means
+DBSCAN
+Hierarchical Clustering
+Gaussian Mixture Model
+Isolation Forest
+One-Class SVM
+OPTICS
+Mean Shift
+Spectral Clustering
+Gaussian Process
+Bayesian Ridge
+ARD Regression
+Poisson Regression
+Cox Regression
+
+
+================================================================================
+7. NEURAL NETWORKS
+   Layers, activations, architectures
+================================================================================
+Dense Layer
+Dropout Layer
+Batch Norm Layer
+Layer Norm
+Conv1D Layer
+Conv2D Layer
+Conv3D Layer
+Depthwise Conv
+Transposed Conv
+MaxPool
+AvgPool
+GlobalAvgPool
+Flatten Layer
+Reshape Layer
+Embedding Layer
+LSTM Layer
+GRU Layer
+Bidirectional Wrapper
+1D RNN
+TCN (Temporal Conv Net)
+ReLU
+GELU
+SiLU / Swish
+Sigmoid
+Tanh
+Softmax
+ELU
+PReLU
+LeakyReLU
+Mish
+Residual Block
+Inception Block
+Squeeze-Excite Block
+MLP Block
+Build Sequential
+Build Functional (DAG)
+Custom Layer
+Attention Layer (Bahdanau)
+Attention Layer (Luong)
+
+
+================================================================================
+8. TRANSFORMERS & LLMs
+   Attention, heads, modern architectures
+================================================================================
+Multi-Head Attention
+Self-Attention
+Cross-Attention
+Causal Mask
+Rotary Positional Encoding (RoPE)
+Sinusoidal Positional Encoding
+ALiBi Positional Bias
+Feed-Forward Block (FFN)
+SwiGLU FFN
+MoE Layer (Mixture of Experts)
+Transformer Encoder Block
+Transformer Decoder Block
+Encoder-Only (BERT-style)
+Decoder-Only (GPT-style)
+Encoder-Decoder (T5-style)
+Vision Transformer (ViT) Block
+Patch Embed
+KV Cache
+Flash Attention
+Grouped Query Attention (GQA)
+Multi-Query Attention (MQA)
+RMS Norm
+Load Pretrained LLM
+Load Pretrained Encoder
+Tokenizer (BPE)
+Tokenizer (SentencePiece)
+Tokenizer (WordPiece)
+Context Window Manager
+System Prompt
+LLM Inference (Greedy)
+LLM Inference (Beam Search)
+LLM Inference (Top-k/Top-p)
+Speculative Decoding
+Streaming Token Output
+Structured Output (JSON mode)
+Tool Call / Function Calling
+Multi-Turn Conversation Manager
+
+
+================================================================================
+9. VISION MODELS
+   CNNs, detectors, segmenters
+================================================================================
+Image Resize
+Image Crop
+Image Augment
+Image Normalize
+ResNet Block
+EfficientNet Block
+MobileNet Block
+Image Classifier
+Object Detector (YOLO)
+Object Detector (DETR)
+Semantic Segmenter
+Instance Segmenter (Mask RCNN)
+Panoptic Segmenter
+Depth Estimator
+Optical Flow
+Keypoint Detector
+Face Detector
+OCR Block
+CLIP Encoder (Image)
+CLIP Encoder (Text)
+SAM (Segment Anything)
+Stable Diffusion Block
+ControlNet Block
+DINO Features
+Feature Pyramid Network (FPN)
+NMS (Non-Max Suppression)
+
+
+================================================================================
+10. AUDIO & SPEECH
+    ASR, TTS, audio features
+================================================================================
+Load Audio
+Resample Audio
+MFCC Features
+Mel Spectrogram
+Waveform Plot
+VAD (Voice Activity Detection)
+ASR (Whisper)
+ASR (Custom)
+TTS Block
+Speaker Embed
+Speaker Diarization
+Audio Classify
+Music Separate
+Noise Reduce
+Audio Augment
+
+
+================================================================================
+11. TRAINING
+    Optimizers, losses, schedulers
+================================================================================
+Train Loop
+Eval Loop
+Validation Step
+Gradient Accumulate
+Forward Pass
+Backward Pass
+Optimizer Step
+Adam Optimizer
+AdamW Optimizer
+SGD Optimizer
+Adagrad
+RMSProp
+LAMB Optimizer
+Lion Optimizer
+Learning Rate Scheduler (Cosine)
+LR Scheduler (Linear Warmup)
+LR Scheduler (Step)
+LR Scheduler (Reduce on Plateau)
+Cross-Entropy Loss
+Binary CE Loss
+MSE Loss
+MAE Loss
+Huber Loss
+Focal Loss
+Contrastive Loss
+Triplet Loss
+RLHF Reward Signal
+KL Divergence Loss
+Gradient Clip
+Mixed Precision (AMP)
+Checkpoint Save
+Checkpoint Load
+Early Stopping
+EarlyStopping (Patience)
+Epoch Counter
+Step Counter
+Batch Sampler
+Weighted Sampler
+Distributed Data Parallel (DDP)
+FSDP
+Model Parallelism
+
+
+================================================================================
+12. FINE-TUNING
+    Adapt pretrained models
+================================================================================
+Full Fine-Tune
+Feature Extraction (Freeze Base)
+Layer-wise LR Decay
+Linear Probe
+LoRA (Low-Rank Adaptation)
+QLoRA
+LoRA+ Config
+DoRA
+IA3 Adapter
+Prefix Tuning
+Prompt Tuning
+Adapter Layer (Houlsby)
+BitFit (Bias-only Tuning)
+PEFT Config Block
+Merge LoRA Weights
+Instruction Tuning Dataset
+Chat Template Apply
+DPO (Direct Preference Optimization)
+PPO Training Loop
+GRPO
+ORPO
+SFT Trainer
+Reward Model Train
+Constitutional AI Filter
+RLAIF Block
+
+
+================================================================================
+13. DISTILLATION & COMPRESSION
+    Make models smaller and faster
+================================================================================
+Teacher Model
+Student Model
+KD Loss (Soft Labels)
+KD Loss (Feature Map)
+Response-Based KD
+Feature-Based KD
+Relation-Based KD
+Self-Distillation
+Born-Again Network
+Post-Training Quantization (PTQ)
+Quantization-Aware Training (QAT)
+INT8 Quantize
+INT4 Quantize
+GPTQ Block
+AWQ Block
+GGUF Export
+Structured Pruning
+Unstructured Pruning
+Magnitude Pruning
+Movement Pruning
+Lottery Ticket Mask
+Weight Sharing
+Low-Rank Factorization
+ONNX Export
+TensorRT Export
+TFLite Export
+Model Benchmarker
+
+
+================================================================================
+14. EVALUATION & METRICS
+    Measure model performance
+================================================================================
+Accuracy
+Precision
+Recall
+F1 Score
+AUC-ROC
+AUC-PR
+Confusion Matrix
+MCC (Matthews Correlation)
+Cohen's Kappa
+RMSE
+MAE
+R2 Score
+MAPE
+Explained Variance
+BLEU Score
+ROUGE Score
+METEOR Score
+BERTScore
+Perplexity
+Exact Match
+Pass@k (Code)
+HumanEval
+mAP (Object Detection)
+IoU
+FID (Image Gen)
+IS Score
+CLIP Score
+WER (Speech)
+CER (Speech)
+Diarization DER
+Calibration Plot
+Expected Calibration Error (ECE)
+Fairness Metrics Block
+Bias Audit Block
+LLM-as-Judge Block
+Human Eval Collect
+
+
+================================================================================
+15. EXPERIMENT TRACKING
+    Log, compare, reproduce
+================================================================================
+Init Run (MLflow)
+Init Run (W&B)
+Init Run (Comet)
+Log Metric
+Log Artifact
+Log Config
+Log Model
+Log Dataset
+Log Media
+Compare Runs
+Hyperparameter Sweep (Grid)
+Hyperparameter Sweep (Random)
+Hyperparameter Sweep (Bayesian)
+Optuna Suggest
+Ray Tune Block
+A/B Experiment Block
+
+
+================================================================================
+16. AGENTS & ORCHESTRATION
+    LLM agents, tools, workflows
+================================================================================
+LLM Agent
+ReAct Agent
+Plan-and-Execute Agent
+Tool Router
+Tool Definition
+Tool Result Parser
+Memory Store (Short-Term)
+Memory Store (Long-Term)
+Episodic Memory
+Semantic Memory
+Agent Step
+Agent Loop
+Max Iterations Guard
+Multi-Agent Supervisor
+Agent Handoff
+Parallel Agent Fan-Out
+Critic Agent
+Reflection Step
+Self-Correction Loop
+Prompt Chain
+Sequential Chain
+Router Chain
+Map-Reduce Chain
+Debate (Multi-Agent)
+
+
+================================================================================
+17. PROMPT ENGINEERING
+    Build & optimize prompts
+================================================================================
+System Prompt Block
+User Prompt Block
+Few-Shot Examples
+Chain-of-Thought Prompt
+Zero-Shot CoT Prompt
+Tree of Thoughts
+Self-Consistency Sample
+Role Assign Block
+Persona Block
+Prompt Template (Jinja)
+Variable Inject
+Output Format Spec
+Constraint Block
+DSPy Module
+DSPy Optimizer
+APE Block (Auto Prompt Engineering)
+Prompt Version Control
+Prompt A/B Test
+
+
+================================================================================
+18. DEPLOYMENT & SERVING
+    Package, serve, scale
+================================================================================
+FastAPI Endpoint
+Flask Endpoint
+gRPC Server
+Triton Inference Server
+vLLM Serve Block
+TGI Block
+Ollama Block
+OpenAI-Compatible API
+Batch Inference
+Async Inference
+Streaming API
+Docker Build
+K8s Deploy
+Auto-Scale Config
+Load Balancer
+Rate Limiter
+Auth Middleware
+Canary Deploy
+Shadow Deploy
+Blue-Green Deploy
+
+
+================================================================================
+19. MONITORING & OBSERVABILITY
+    Track production quality & drift
+================================================================================
+Request Logger
+Latency Monitor
+Throughput Monitor
+Error Rate Alert
+Input Drift Detect
+Output Drift Detect
+Data Quality Check
+Feature Drift (PSI)
+Prediction Drift
+Model Degradation Alert
+Feedback Collect
+Human-in-Loop Flag
+Hallucination Detector
+Toxicity Filter
+PII Detector
+Guardrail Block
+Tracing (OpenTelemetry)
+Span Logger
+
+
+================================================================================
+20. UTILITIES & VARIABLES
+    General programming helpers
+================================================================================
+Variable
+Constant
+List
+Dict
+Set
+Tuple
+String Format
+Regex Match
+Math Op
+Random Seed
+UUID Generate
+Timestamp
+Parse Date
+HTTP Request
+JSON Parse
+JSON Stringify
+Base64 Encode
+Hash Block
+Zip Files
+Unzip Files
+Environment Var
+Config Load (YAML)
+Config Load (TOML)
+Subprocess Run
+Parallel Map
+Thread Pool
+
+
+================================================================================
+NOTES FOR IMPLEMENTATION
+================================================================================
+
+VS Code Extension vs Web App:
+  - Shared block schema (JSON or custom DSL) should define all blocks once
+  - Web version: visual/abstract, good for prototyping and education
+  - VS Code version: blocks emit real runnable Python code
+    (PyTorch, HuggingFace, scikit-learn, LangChain, LlamaIndex, etc.)
+
+Suggested code-gen targets per category:
+  Classical ML       -> scikit-learn
+  Neural Networks    -> PyTorch / Keras
+  Transformers/LLMs  -> HuggingFace Transformers, vLLM
+  Fine-Tuning        -> HuggingFace PEFT, TRL
+  Embeddings/RAG     -> LangChain, LlamaIndex, FAISS, Qdrant
+  Agents             -> LangChain, LlamaIndex, AutoGen, CrewAI
+  Experiment Track   -> MLflow, Weights & Biases
+  Serving            -> FastAPI, vLLM, Triton
+  Monitoring         -> Evidently, Arize, Prometheus + OpenTelemetry
+
+Block color coding (suggested by category group):
+  Gray    -> Control Flow, Utilities
+  Blue    -> Data I/O, Training, Deployment
+  Green   -> Data Processing, Classical ML, Experiment Tracking
+  Purple  -> Text/NLP, Embeddings, Transformers, Agents, Prompts
+  Amber   -> Neural Networks, Distillation/Compression
+  Teal    -> Audio & Speech
+  Coral   -> Vision Models
+  Red     -> Evaluation & Metrics
+  Pink    -> Fine-Tuning, Monitoring

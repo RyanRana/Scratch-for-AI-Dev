@@ -1,0 +1,418 @@
+{
+  "meta": {
+    "model": "claude-opus-4-6",
+    "timestamp": "2026-04-08T23:27:36.676750+00:00",
+    "total_blocks": 505,
+    "method": "both"
+  },
+  "challenges": [
+    {
+      "id": "clf_01_random_forest",
+      "title": "Random Forest Classifier",
+      "prompt": "Write a complete Python script that loads the Iris dataset from sklearn, splits it 80/20 stratified, trains a Random Forest classifier with 200 trees, predicts on the test set, and prints accuracy, precision, recall, and F1.",
+      "blocks": {
+        "method": "blocks",
+        "challenge_id": "clf_01_random_forest",
+        "code": "import numpy as np\nimport pandas as pd\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\n# Load Iris dataset from sklearn\niris = load_iris()\ndf = pd.DataFrame(data=iris.data, columns=iris.feature_names)\ndf['target'] = iris.target\n\n# Stratified split 80/20\nfeature_columns = iris.feature_names\ntarget_column = 'target'\n\ndf_train, df_test = train_test_split(\n    df,\n    test_size=0.2,\n    stratify=df[target_column],\n    random_state=42\n)\ndf_train = df_train.reset_index(drop=True)\ndf_test = df_test.reset_index(drop=True)\n\n# DataFrame \u2192 X & y (train)\nX_train = df_train[feature_columns].values\ny_train = df_train[target_column].values\n\n# DataFrame \u2192 X & y (test)\nX_test = df_test[feature_columns].values\ny_test = df_test[target_column].values\n\n# Train Random Forest with 200 trees\nrf_model = RandomForestClassifier(\n    n_estimators=200,\n    max_depth=None,\n    min_samples_split=2,\n    max_features='sqrt',\n    random_state=42\n)\nrf_model.fit(X_train, y_train)\n\n# Predict on test set\ny_pred = rf_model.predict(X_test)\n\n# Evaluate and print metrics\naccuracy = accuracy_score(y_test, y_pred, normalize=True)\nprecision = precision_score(y_test, y_pred, average='weighted', zero_division=0)\nrecall = recall_score(y_test, y_pred, average='weighted', zero_division=0)\nf1 = f1_score(y_test, y_pred, average='weighted')\n\nprint(f'Accuracy:  {accuracy:.4f}')\nprint(f'Precision: {precision:.4f}')\nprint(f'Recall:    {recall:.4f}')\nprint(f'F1 Score:  {f1:.4f}')",
+        "raw_stages": {
+          "stage1": {
+            "categories": [
+              "data-io",
+              "data-processing",
+              "classical-ml",
+              "evaluation"
+            ],
+            "pattern": "supervised_classification",
+            "search_terms": [
+              "load iris dataset",
+              "train test split stratified",
+              "random forest classifier",
+              "accuracy precision recall f1",
+              "sklearn classification metrics"
+            ],
+            "metrics": {
+              "latency_s": 2.595,
+              "input_tokens": 309,
+              "output_tokens": 67,
+              "total_tokens": 376,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "retrieval": {
+            "blocks_retrieved": 60,
+            "catalog_chars": 7776,
+            "pattern": "supervised_classification"
+          },
+          "stage2": {
+            "blocks_selected": 10,
+            "wiring_count": 15,
+            "metrics": {
+              "latency_s": 20.239,
+              "input_tokens": 3302,
+              "output_tokens": 1843,
+              "total_tokens": 5145,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "stage3_polish": {
+            "metrics": {
+              "latency_s": 6.288,
+              "input_tokens": 5614,
+              "output_tokens": 572,
+              "total_tokens": 6186,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          }
+        },
+        "metrics": {
+          "total_calls": 3,
+          "total_latency_s": 29.122,
+          "total_input_tokens": 9225,
+          "total_output_tokens": 2482,
+          "total_tokens": 11707,
+          "per_call": [
+            {
+              "latency_s": 7.729,
+              "input_tokens": 109,
+              "output_tokens": 634,
+              "total_tokens": 743,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "RandomForestClassifier",
+            "train_test_split",
+            "accuracy_score"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 47,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      },
+      "vanilla": {
+        "method": "vanilla",
+        "challenge_id": "clf_01_random_forest",
+        "code": "\"\"\"Random Forest classifier on the Iris dataset with evaluation metrics.\"\"\"\n\nimport numpy as np\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\n# Load the Iris dataset\niris = load_iris()\nX, y = iris.data, iris.target\n\n# Split 80/20 with stratification to preserve class distribution\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\n# Train a Random Forest classifier with 200 trees\nclf = RandomForestClassifier(n_estimators=200, random_state=42)\nclf.fit(X_train, y_train)\n\n# Predict on the test set\ny_pred = clf.predict(X_test)\n\n# Compute metrics (weighted average for multi-class)\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred, average=\"weighted\")\nrecall = recall_score(y_test, y_pred, average=\"weighted\")\nf1 = f1_score(y_test, y_pred, average=\"weighted\")\n\n# Print results\nprint(f\"Accuracy:  {accuracy:.4f}\")\nprint(f\"Precision: {precision:.4f}\")\nprint(f\"Recall:    {recall:.4f}\")\nprint(f\"F1 Score:  {f1:.4f}\")",
+        "raw_response": "\n```python\n\"\"\"Random Forest classifier on the Iris dataset with evaluation metrics.\"\"\"\n\nimport numpy as np\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\n# Load the Iris dataset\niris = load_iris()\nX, y = iris.data, iris.target\n\n# Split 80/20 with stratification to preserve class distribution\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\n# Train a Random Forest classifier with 200 trees\nclf = RandomForestClassifier(n_estimators=200, random_state=42)\nclf.fit(X_train, y_train)\n\n# Predict on the test set\ny_pred = clf.predict(X_test)\n\n# Compute metrics (weighted average for multi-class)\naccuracy = accuracy_score(y_test, y_pred)\nprecision = precision_score(y_test, y_pred, average=\"weighted\")\nrecall = recall_score(y_test, y_pred, average=\"weighted\")\nf1 = f1_score(y_test, y_pred, average=\"weighted\")\n\n# Print results\nprint(f\"Accuracy:  {accuracy:.4f}\")\nprint(f\"Precision: {precision:.4f}\")\nprint(f\"Recall:    {recall:.4f}\")\nprint(f\"F1 Score:  {f1:.4f}\")\n```",
+        "metrics": {
+          "total_calls": 1,
+          "total_latency_s": 5.628,
+          "total_input_tokens": 106,
+          "total_output_tokens": 394,
+          "total_tokens": 500,
+          "per_call": [
+            {
+              "latency_s": 7.729,
+              "input_tokens": 109,
+              "output_tokens": 634,
+              "total_tokens": 743,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "RandomForestClassifier",
+            "train_test_split",
+            "accuracy_score"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 28,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      }
+    },
+    {
+      "id": "clf_02_xgboost_pipeline",
+      "title": "XGBoost with Cross-Validation",
+      "prompt": "Write Python code that loads a CSV file 'data.csv', does a stratified 5-fold cross-validation with XGBoost (learning_rate=0.1, max_depth=6, 300 rounds), prints mean and std of AUC-ROC across folds, then trains a final model on all data.",
+      "blocks": {
+        "method": "blocks",
+        "challenge_id": "clf_02_xgboost_pipeline",
+        "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import StratifiedKFold\nfrom sklearn.metrics import roc_auc_score\nfrom xgboost import XGBClassifier\n\n# Load data\ndf = pd.read_csv('data.csv')\n\n# Separate features and target\nX = df.drop(columns=['target']).values\ny = df['target'].values\n\n# Stratified 5-fold cross-validation\nskf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n\nauc_scores = []\n\nfor fold_idx, (train_index, val_index) in enumerate(skf.split(X, y)):\n    X_train, X_val = X[train_index], X[val_index]\n    y_train, y_val = y[train_index], y[val_index]\n\n    model = XGBClassifier(\n        n_estimators=300,\n        learning_rate=0.1,\n        max_depth=6,\n        subsample=1,\n        colsample_bytree=1,\n        reg_alpha=0,\n        reg_lambda=1,\n        random_state=42,\n        use_label_encoder=False,\n        eval_metric='logloss'\n    )\n\n    model.fit(X_train, y_train)\n\n    # Get probability predictions for AUC-ROC\n    y_score = model.predict_proba(X_val)[:, 1]\n\n    auc = roc_auc_score(y_val, y_score)\n    auc_scores.append(auc)\n    print(f'Fold {fold_idx + 1} AUC-ROC: {auc:.4f}')\n\nmean_auc = np.mean(auc_scores)\nstd_auc = np.std(auc_scores)\nprint(f'\\nMean AUC-ROC: {mean_auc:.4f}')\nprint(f'Std AUC-ROC:  {std_auc:.4f}')\n\n# Train final model on all data\nprint('\\nTraining final model on all data...')\nfinal_model = XGBClassifier(\n    n_estimators=300,\n    learning_rate=0.1,\n    max_depth=6,\n    subsample=1,\n    colsample_bytree=1,\n    reg_alpha=0,\n    reg_lambda=1,\n    random_state=42,\n    use_label_encoder=False,\n    eval_metric='logloss'\n)\nfinal_model.fit(X, y)\nprint('Final model trained successfully on all data.')",
+        "raw_stages": {
+          "stage1": {
+            "categories": [
+              "data-io",
+              "data-processing",
+              "classical-ml",
+              "evaluation"
+            ],
+            "pattern": "supervised_classification",
+            "search_terms": [
+              "csv load pandas",
+              "stratified k-fold cross-validation",
+              "XGBoost classifier",
+              "AUC-ROC evaluation",
+              "cross_val_score",
+              "xgb train final model",
+              "stratified split"
+            ],
+            "metrics": {
+              "latency_s": 2.896,
+              "input_tokens": 329,
+              "output_tokens": 89,
+              "total_tokens": 418,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "retrieval": {
+            "blocks_retrieved": 60,
+            "catalog_chars": 7886,
+            "pattern": "supervised_classification"
+          },
+          "stage2": {
+            "blocks_selected": 7,
+            "wiring_count": 4,
+            "metrics": {
+              "latency_s": 17.993,
+              "input_tokens": 3455,
+              "output_tokens": 1564,
+              "total_tokens": 5019,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "stage3_polish": {
+            "metrics": {
+              "latency_s": 6.919,
+              "input_tokens": 5406,
+              "output_tokens": 659,
+              "total_tokens": 6065,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          }
+        },
+        "metrics": {
+          "total_calls": 3,
+          "total_latency_s": 27.808,
+          "total_input_tokens": 9190,
+          "total_output_tokens": 2312,
+          "total_tokens": 11502,
+          "per_call": [
+            {
+              "latency_s": 7.729,
+              "input_tokens": 109,
+              "output_tokens": 634,
+              "total_tokens": 743,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "XGBClassifier",
+            "StratifiedKFold",
+            "roc_auc"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 54,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      },
+      "vanilla": {
+        "method": "vanilla",
+        "challenge_id": "clf_02_xgboost_pipeline",
+        "code": "import pandas as pd\nimport numpy as np\nfrom xgboost import XGBClassifier\nfrom sklearn.model_selection import StratifiedKFold, cross_val_score\n\n# Load data\ndf = pd.read_csv(\"data.csv\")\n\n# Assume the last column is the target variable\nX = df.iloc[:, :-1]\ny = df.iloc[:, -1]\n\n# Define XGBoost model with specified hyperparameters\nmodel = XGBClassifier(\n    learning_rate=0.1,\n    max_depth=6,\n    n_estimators=300,\n    use_label_encoder=False,\n    eval_metric=\"logloss\",  # suppress warnings during training\n    random_state=42,\n)\n\n# Stratified 5-fold cross-validation\ncv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n\n# Compute AUC-ROC scores across folds\nauc_scores = cross_val_score(\n    estimator=model,\n    X=X,\n    y=y,\n    cv=cv,\n    scoring=\"roc_auc\",\n    n_jobs=-1,\n)\n\n# Print mean and std of AUC-ROC\nprint(f\"AUC-ROC per fold: {auc_scores}\")\nprint(f\"Mean AUC-ROC: {np.mean(auc_scores):.6f}\")\nprint(f\"Std  AUC-ROC: {np.std(auc_scores):.6f}\")\n\n# Train final model on all data\nfinal_model = XGBClassifier(\n    learning_rate=0.1,\n    max_depth=6,\n    n_estimators=300,\n    use_label_encoder=False,\n    eval_metric=\"logloss\",\n    random_state=42,\n)\nfinal_model.fit(X, y)\n\nprint(\"\\nFinal model trained on all data successfully.\")\nprint(f\"Number of training samples: {X.shape[0]}\")\nprint(f\"Number of features: {X.shape[1]}\")",
+        "raw_response": "\n```python\nimport pandas as pd\nimport numpy as np\nfrom xgboost import XGBClassifier\nfrom sklearn.model_selection import StratifiedKFold, cross_val_score\n\n# Load data\ndf = pd.read_csv(\"data.csv\")\n\n# Assume the last column is the target variable\nX = df.iloc[:, :-1]\ny = df.iloc[:, -1]\n\n# Define XGBoost model with specified hyperparameters\nmodel = XGBClassifier(\n    learning_rate=0.1,\n    max_depth=6,\n    n_estimators=300,\n    use_label_encoder=False,\n    eval_metric=\"logloss\",  # suppress warnings during training\n    random_state=42,\n)\n\n# Stratified 5-fold cross-validation\ncv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n\n# Compute AUC-ROC scores across folds\nauc_scores = cross_val_score(\n    estimator=model,\n    X=X,\n    y=y,\n    cv=cv,\n    scoring=\"roc_auc\",\n    n_jobs=-1,\n)\n\n# Print mean and std of AUC-ROC\nprint(f\"AUC-ROC per fold: {auc_scores}\")\nprint(f\"Mean AUC-ROC: {np.mean(auc_scores):.6f}\")\nprint(f\"Std  AUC-ROC: {np.std(auc_scores):.6f}\")\n\n# Train final model on all data\nfinal_model = XGBClassifier(\n    learning_rate=0.1,\n    max_depth=6,\n    n_estimators=300,\n    use_label_encoder=False,\n    eval_metric=\"logloss\",\n    random_state=42,\n)\nfinal_model.fit(X, y)\n\nprint(\"\\nFinal model trained on all data successfully.\")\nprint(f\"Number of training samples: {X.shape[0]}\")\nprint(f\"Number of features: {X.shape[1]}\")\n```",
+        "metrics": {
+          "total_calls": 1,
+          "total_latency_s": 7.076,
+          "total_input_tokens": 126,
+          "total_output_tokens": 520,
+          "total_tokens": 646,
+          "per_call": [
+            {
+              "latency_s": 7.729,
+              "input_tokens": 109,
+              "output_tokens": 634,
+              "total_tokens": 743,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "XGBClassifier",
+            "StratifiedKFold",
+            "roc_auc"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 46,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      }
+    },
+    {
+      "id": "clf_03_regression_compare",
+      "title": "Compare Regression Models",
+      "prompt": "Load the Boston-style housing CSV ('housing.csv'), split 80/20, train Linear Regression, Ridge (alpha=1.0), and Lasso (alpha=0.5). Print RMSE and R-squared for each model side by side.",
+      "blocks": {
+        "method": "blocks",
+        "challenge_id": "clf_03_regression_compare",
+        "code": "import numpy as np\nimport pandas as pd\nfrom sklearn.linear_model import Lasso, LinearRegression, Ridge\nfrom sklearn.metrics import mean_squared_error, r2_score\nfrom sklearn.model_selection import train_test_split\n\n# Load CSV\ndf = pd.read_csv(\"housing.csv\", sep=\",\", encoding=\"utf-8\")\n\n# Determine target column (try common names)\ntarget_col = None\nfor candidate in ['MEDV', 'medv', 'target', 'price', 'Price', 'PRICE']:\n    if candidate in df.columns:\n        target_col = candidate\n        break\nif target_col is None:\n    # Assume last column is target\n    target_col = df.columns[-1]\n\nprint(f\"Target column: {target_col}\")\nprint(f\"Dataset shape: {df.shape}\")\nprint()\n\n# Separate features and target\nX = df.drop(columns=[target_col]).values\ny = df[target_col].values\n\n# Split 80/20\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nprint(f\"Training samples: {X_train.shape[0]}\")\nprint(f\"Testing samples:  {X_test.shape[0]}\")\nprint()\n\n# Linear Regression\nlinear_reg_model = LinearRegression(fit_intercept=True)\nlinear_reg_model.fit(X_train, y_train)\ny_pred_lr = linear_reg_model.predict(X_test)\n\n# Ridge Regression\nridge_model = Ridge(alpha=1.0, fit_intercept=True, solver=\"auto\")\nridge_model.fit(X_train, y_train)\ny_pred_ridge = ridge_model.predict(X_test)\n\n# Lasso Regression\nlasso_model = Lasso(alpha=0.5, max_iter=1000, fit_intercept=True)\nlasso_model.fit(X_train, y_train)\ny_pred_lasso = lasso_model.predict(X_test)\n\n# RMSE - Linear Regression\nrmse_lr = np.sqrt(mean_squared_error(y_test, y_pred_lr))\n\n# R2 Score - Linear Regression\nr2_lr = r2_score(y_test, y_pred_lr)\n\n# RMSE - Ridge\nrmse_ridge = np.sqrt(mean_squared_error(y_test, y_pred_ridge))\n\n# R2 Score - Ridge\nr2_ridge = r2_score(y_test, y_pred_ridge)\n\n# RMSE - Lasso\nrmse_lasso = np.sqrt(mean_squared_error(y_test, y_pred_lasso))\n\n# R2 Score - Lasso\nr2_lasso = r2_score(y_test, y_pred_lasso)\n\n# Print results side by side\nresults = {\n    'Linear Regression': {'RMSE': rmse_lr, 'R2': r2_lr},\n    'Ridge (alpha=1.0)': {'RMSE': rmse_ridge, 'R2': r2_ridge},\n    'Lasso (alpha=0.5)': {'RMSE': rmse_lasso, 'R2': r2_lasso},\n}\n\nprint('=' * 70)\nprint(f'{\"Model\":<25} {\"RMSE\":>15} {\"R-squared\":>15}')\nprint('-' * 70)\nfor name, metrics in results.items():\n    print(f'{name:<25} {metrics[\"RMSE\"]:>15.4f} {metrics[\"R2\"]:>15.4f}')\nprint('=' * 70)",
+        "raw_stages": {
+          "stage1": {
+            "categories": [
+              "data-io",
+              "data-processing",
+              "classical-ml",
+              "evaluation"
+            ],
+            "pattern": "supervised_regression",
+            "search_terms": [
+              "load csv",
+              "train test split",
+              "linear regression",
+              "ridge regression",
+              "lasso regression",
+              "RMSE",
+              "R-squared",
+              "model comparison"
+            ],
+            "metrics": {
+              "latency_s": 2.796,
+              "input_tokens": 312,
+              "output_tokens": 79,
+              "total_tokens": 391,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "retrieval": {
+            "blocks_retrieved": 60,
+            "catalog_chars": 7988,
+            "pattern": "supervised_regression"
+          },
+          "stage2": {
+            "blocks_selected": 11,
+            "wiring_count": 4,
+            "metrics": {
+              "latency_s": 17.691,
+              "input_tokens": 3476,
+              "output_tokens": 1452,
+              "total_tokens": 4928,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          },
+          "stage3_polish": {
+            "metrics": {
+              "latency_s": 9.208,
+              "input_tokens": 4927,
+              "output_tokens": 936,
+              "total_tokens": 5863,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          }
+        },
+        "metrics": {
+          "total_calls": 3,
+          "total_latency_s": 29.695,
+          "total_input_tokens": 8715,
+          "total_output_tokens": 2467,
+          "total_tokens": 11182,
+          "per_call": [
+            {
+              "latency_s": 7.729,
+              "input_tokens": 109,
+              "output_tokens": 634,
+              "total_tokens": 743,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "LinearRegression",
+            "Ridge",
+            "Lasso",
+            "mean_squared_error",
+            "r2_score"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 65,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      },
+      "vanilla": {
+        "method": "vanilla",
+        "challenge_id": "clf_03_regression_compare",
+        "code": "import pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression, Ridge, Lasso\nfrom sklearn.metrics import mean_squared_error, r2_score\nfrom sklearn.preprocessing import StandardScaler\n\n# Load dataset\ndf = pd.read_csv(\"housing.csv\")\n\n# Assume the target column is the last column (common convention for housing datasets)\n# Adjust if your CSV has a different target column name\ntarget_col = df.columns[-1]\nprint(f\"Target column: {target_col}\\n\")\n\nX = df.drop(columns=[target_col])\n\n# Handle non-numeric columns (e.g., one-hot encode categoricals if any)\nX = pd.get_dummies(X, drop_first=True)\n\n# Drop rows with NaN values (if any)\ny = df[target_col]\nmask = X.notna().all(axis=1) & y.notna()\nX = X[mask]\ny = y[mask]\n\n# Split 80/20\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\n# Scale features (important for Ridge and Lasso)\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\n# Define models\nmodels = {\n    \"Linear Regression\": LinearRegression(),\n    \"Ridge (alpha=1.0)\": Ridge(alpha=1.0),\n    \"Lasso (alpha=0.5)\": Lasso(alpha=0.5),\n}\n\n# Train and evaluate each model\nresults = {}\nfor name, model in models.items():\n    model.fit(X_train_scaled, y_train)\n    y_pred = model.predict(X_test_scaled)\n    rmse = np.sqrt(mean_squared_error(y_test, y_pred))\n    r2 = r2_score(y_test, y_pred)\n    results[name] = {\"RMSE\": rmse, \"R\u00b2\": r2}\n\n# Print results side by side\nheader = f\"{'Model':<25} {'RMSE':>12} {'R\u00b2':>12}\"\nprint(header)\nprint(\"-\" * len(header))\nfor name, metrics in results.items():\n    print(f\"{name:<25} {metrics['RMSE']:>12.4f} {metrics['R\u00b2']:>12.4f}\")",
+        "raw_response": "\n\n```python\nimport pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression, Ridge, Lasso\nfrom sklearn.metrics import mean_squared_error, r2_score\nfrom sklearn.preprocessing import StandardScaler\n\n# Load dataset\ndf = pd.read_csv(\"housing.csv\")\n\n# Assume the target column is the last column (common convention for housing datasets)\n# Adjust if your CSV has a different target column name\ntarget_col = df.columns[-1]\nprint(f\"Target column: {target_col}\\n\")\n\nX = df.drop(columns=[target_col])\n\n# Handle non-numeric columns (e.g., one-hot encode categoricals if any)\nX = pd.get_dummies(X, drop_first=True)\n\n# Drop rows with NaN values (if any)\ny = df[target_col]\nmask = X.notna().all(axis=1) & y.notna()\nX = X[mask]\ny = y[mask]\n\n# Split 80/20\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\n# Scale features (important for Ridge and Lasso)\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\n# Define models\nmodels = {\n    \"Linear Regression\": LinearRegression(),\n    \"Ridge (alpha=1.0)\": Ridge(alpha=1.0),\n    \"Lasso (alpha=0.5)\": Lasso(alpha=0.5),\n}\n\n# Train and evaluate each model\nresults = {}\nfor name, model in models.items():\n    model.fit(X_train_scaled, y_train)\n    y_pred = model.predict(X_test_scaled)\n    rmse = np.sqrt(mean_squared_error(y_test, y_pred))\n    r2 = r2_score(y_test, y_pred)\n    results[name] = {\"RMSE\": rmse, \"R\u00b2\": r2}\n\n# Print results side by side\nheader = f\"{'Model':<25} {'RMSE':>12} {'R\u00b2':>12}\"\nprint(header)\nprint(\"-\" * len(header))\nfor name, metrics in results.items():\n    print(f\"{name:<25} {metrics['RMSE']:>12.4f} {metrics['R\u00b2']:>12.4f}\")\n```",
+        "metrics": {
+          "total_calls": 1,
+          "total_latency_s": 7.729,
+          "total_input_tokens": 109,
+          "total_output_tokens": 634,
+          "total_tokens": 743,
+          "per_call": [
+            {
+              "latency_s": 7.729,
+              "input_tokens": 109,
+              "output_tokens": 634,
+              "total_tokens": 743,
+              "model": "claude-opus-4-6",
+              "stop_reason": "end_turn"
+            }
+          ]
+        },
+        "quality": {
+          "score": 1.0,
+          "has_imports": true,
+          "has_keywords": true,
+          "keyword_hits": [
+            "LinearRegression",
+            "Ridge",
+            "Lasso",
+            "mean_squared_error",
+            "r2_score"
+          ],
+          "keyword_misses": [],
+          "keyword_ratio": 1.0,
+          "lines": 48,
+          "syntax_valid": true,
+          "completeness": 1.0
+        }
+      }
+    }
+  ]
+}

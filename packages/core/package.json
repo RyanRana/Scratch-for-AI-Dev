@@ -1,0 +1,21 @@
+{
+  "name": "@ai-blocks/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ai-blocks/block-schemas": "workspace:*",
+    "@lezer/common": "^1.5.1",
+    "@lezer/python": "^1.1.18"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  }
+}
