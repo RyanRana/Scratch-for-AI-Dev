@@ -258,7 +258,7 @@ export function Landing({ onEnter, onTemplate, onDocs }: {
               Docs
             </button>
             <a
-              href="https://github.com/aiblocksproject/ai-blocks"
+              href="https://github.com/RyanRana/vercel-upload"
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
