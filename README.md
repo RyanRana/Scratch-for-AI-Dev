@@ -54,9 +54,6 @@ Blocks live in [`packages/block-schemas`](packages/block-schemas/src/blocks) and
   <img src="./docs/screenshots/editor-output.png" alt="Generated code" width="48%" />
 </p>
 
-<p align="center">
-  <img src="./docs/screenshots/landing.png" alt="Landing page" width="80%" />
-</p>
 
 ## Getting started
 
